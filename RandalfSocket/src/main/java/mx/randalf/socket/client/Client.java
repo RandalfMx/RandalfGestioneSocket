@@ -375,6 +375,7 @@ public class Client
 				{
 					Linea = input.readLine();
 					log.debug("Linea: "+Linea);
+					log.debug("Linea: "+convertMsg(Linea));
 					if (Linea == null)
 						Linea = "";
 					else
@@ -437,6 +438,7 @@ public class Client
 				{
 					Linea = input.readLine();
 					log.debug("Linea: "+Linea);
+					log.debug("Linea: "+convertMsg(Linea));
 					if (Linea == null)
 					{
 						throw new ClientException("Connessione caduta");
@@ -571,6 +573,7 @@ public class Client
 			{
 				log.debug("Send(String)");
 				log.debug("Msg: " + msg);
+				log.debug("Msg: " + convertMsg(msg));
 				output.println(msg);
 			}
 			else
@@ -606,6 +609,7 @@ public class Client
 			{
 				log.debug("Send(String, boolean)");
 				log.debug("Msg: " + msg);
+				log.debug("Msg: " + convertMsg(msg));
 				if (endline)
 				{
 					output.println(msg);
@@ -626,6 +630,16 @@ public class Client
 			return false;
 		}
 		return true;
+	}
+
+	private String convertMsg(String msg){
+		String testo = null;
+		String ris = "";
+		for (int x=0; x<msg.length(); x++){
+			testo = Integer.toHexString(new Integer(msg.charAt(x)).intValue()).toUpperCase();
+			ris += (testo.length()==1?"0":"")+testo+" ";
+		}
+		return ris;
 	}
 
 	/**

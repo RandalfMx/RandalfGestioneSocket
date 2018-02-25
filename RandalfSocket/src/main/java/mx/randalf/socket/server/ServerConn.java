@@ -44,7 +44,7 @@ public class ServerConn
 		}
 		catch (IOException e)
 		{
-			log.error(e);
+			log.error(e.getMessage(), e);
 		}
 
 	}
@@ -110,8 +110,8 @@ public class ServerConn
 		}
 		catch(Exception e)
 		{
-			log.error("Problemi di Chiusura del Client");
-			log.error(e);
+			log.error("\n"+"Problemi di Chiusura del Client");
+			log.error(e.getMessage(), e);
 			return false;
 		}
 		return true;

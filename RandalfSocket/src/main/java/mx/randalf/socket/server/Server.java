@@ -36,7 +36,7 @@ public class Server
 		}
 		catch(Exception e)
 		{
-			log.error(e);
+			log.error(e.getMessage(), e);
 		}
 	}
 
@@ -54,7 +54,7 @@ public class Server
 		}
 		catch(Exception e)
 		{
-			log.error(e);
+			log.error(e.getMessage(), e);
 		}
 		return incoming;
 	}
@@ -70,7 +70,7 @@ public class Server
 		}
 		catch(Exception e)
 		{
-			log.error(e);
+			log.error(e.getMessage(), e);
 			return false;
 		}
 		return true;

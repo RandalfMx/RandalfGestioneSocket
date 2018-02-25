@@ -73,30 +73,30 @@ public class Client
 		{
 			error = false;
 			// Apro la Connesione Con il Server.
-			log.debug("Apertura connessione " + indi + ":" + port);
+			log.debug("\n"+"Apertura connessione " + indi + ":" + port);
 			Connect = new Socket(indi, port);
 
 			Connect.setKeepAlive(true);
-			log.debug("KeepAlive: "+Connect.getKeepAlive());
+			log.debug("\n"+"KeepAlive: "+Connect.getKeepAlive());
 			// Inizializzo le Variabili per il Colloquio con il Server.
-			log.debug("Connect.getInputStream()");
+			log.debug("\n"+"Connect.getInputStream()");
 			Inp = Connect.getInputStream();
-			log.debug("InputStreamReader(Inp)");
+			log.debug("\n"+"InputStreamReader(Inp)");
 			isr = new InputStreamReader(Inp);
-			log.debug("BufferedReader(isr)");
+			log.debug("\n"+"BufferedReader(isr)");
 			input = new BufferedReader(isr);
 
-			log.debug("Connect.getOutputStream()");
+			log.debug("\n"+"Connect.getOutputStream()");
 			os = Connect.getOutputStream();
-			log.debug("PrintStream(os)");
+			log.debug("\n"+"PrintStream(os)");
 			output = new PrintStream(os);
-			log.debug("fine");
+			log.debug("\n"+"fine");
 			ris = true;
 		}
 		catch (Exception e)
 		{
 			error = true;
-			log.error(e);
+			log.error(e.getMessage(), e);
 			throw new ClientException("Problemi di connesione con il server [" + indi
 					+ ":" + port + "]");
 		}
@@ -117,16 +117,16 @@ public class Client
 
 		try
 		{
-			log.debug("Recive");
-			log.debug("error: "+error);
+			log.debug("\n"+"Recive");
+			log.debug("\n"+"error: "+error);
 			if (!error)
 			{
-				log.debug("Recive");
+				log.debug("\n"+"Recive");
 				// Inizia il Ciclo di Attesa per le informazioni del Server.
 				while (Linea.equals(""))
 				{
 					Linea = input.readLine();
-					log.debug("Linea: " + Linea);
+					log.debug("\n"+"Linea: " + Linea);
 				}
 			}
 			else
@@ -138,13 +138,13 @@ public class Client
 		}
 		catch (SocketException e)
 		{
-			log.error(e);
+			log.error(e.getMessage(), e);
 			throw new ClientException("000", "Connessione  caduta",
 					"Connessione caduta");
 		}
 		catch (Exception e)
 		{
-			log.error(e);
+			log.error(e.getMessage(), e);
 			Linea = "";
 		}
 		return Linea;
@@ -169,7 +169,7 @@ public class Client
 		{
 			if (!error)
 			{
-				log.debug("Recive");
+				log.debug("\n"+"Recive");
 				
 				// Inizia il Ciclo di Attesa per le informazioni del Server.
 				while (((x=Inp.read(c))>-1))
@@ -196,21 +196,21 @@ public class Client
 						out.write(c2);*/
 					}
 					c = new byte[100000];
-					log.debug("x: "+x);
+					log.debug("\n"+"x: "+x);
 				}
 //				out.write(new String(c).getBytes());
-				log.debug("Linea: " + linea);
+				log.debug("\n"+"Linea: " + linea);
 			}
 		}
 		catch (SocketException e)
 		{
 			if (Connect != null &&
 					Connect.getInetAddress() != null)
-				log.error("Connessione: "+Connect.getInetAddress().getHostAddress()+":"+Connect.getInetAddress().getHostName());
+				log.error("\n"+"Connessione: "+Connect.getInetAddress().getHostAddress()+":"+Connect.getInetAddress().getHostName());
 			if (Connect != null &&
 					Connect.getLocalAddress() != null)
-				log.error("Connessione: "+Connect.getLocalAddress().getHostAddress()+":"+Connect.getLocalPort());
-			log.error(e);
+				log.error("\n"+"Connessione: "+Connect.getLocalAddress().getHostAddress()+":"+Connect.getLocalPort());
+			log.error(e.getMessage(), e);
 			throw new ClientException("000", "Connessione  caduta",
 					"Connessione caduta");
 		}
@@ -218,11 +218,11 @@ public class Client
 		{
 			if (Connect != null &&
 					Connect.getInetAddress() != null)
-				log.error("Connessione: "+Connect.getInetAddress().getHostAddress()+":"+Connect.getInetAddress().getHostName());
+				log.error("\n"+"Connessione: "+Connect.getInetAddress().getHostAddress()+":"+Connect.getInetAddress().getHostName());
 			if (Connect != null &&
 					Connect.getLocalAddress() != null)
-				log.error("Connessione: "+Connect.getLocalAddress().getHostAddress()+":"+Connect.getLocalPort());
-			log.error(e);
+				log.error("\n"+"Connessione: "+Connect.getLocalAddress().getHostAddress()+":"+Connect.getLocalPort());
+			log.error(e.getMessage(), e);
 		}
 	}
 
@@ -247,7 +247,7 @@ public class Client
 		{
 			if (!error)
 			{
-				log.debug("Recive (int)");
+				log.debug("\n"+"Recive (int)");
 				// Inizia il Ciclo di Attesa per le informazioni del Server.
 				while (Ciclo)
 				{
@@ -268,13 +268,13 @@ public class Client
 		}
 		catch (SocketException e)
 		{
-			log.error(e);
+			log.error(e.getMessage(), e);
 			throw new ClientException("000", "Connessione  caduta",
 					"Connessione caduta");
 		}
 		catch (Exception e)
 		{
-			log.error(e);
+			log.error(e.getMessage(), e);
 			Linea = "";
 		}
 		return Linea;
@@ -306,7 +306,7 @@ public class Client
 		{
 			if (!error)
 			{
-				log.debug("Recive (int, int)");
+				log.debug("\n"+"Recive (int, int)");
 //				System.out.println("Connect: "+Connect.getInetAddress().getHostAddress());
 //				System.out.println("Recive ("+termline+", "+escline+")");
 				// Inizia il Ciclo di Attesa per le informazioni del Server.
@@ -337,13 +337,13 @@ public class Client
 		}
 		catch (SocketException e)
 		{
-			log.error(e);
+			log.error(e.getMessage(), e);
 			throw new ClientException("000", "Connessione  caduta",
 					"Connessione caduta");
 		}
 		catch (Exception e)
 		{
-			log.error(e);
+			log.error(e.getMessage(), e);
 			Linea = "";
 		}
 		return Linea;
@@ -369,13 +369,13 @@ public class Client
 		{
 			if (!error)
 			{
-				log.debug("Recive(String)");
+				log.debug("\n"+"Recive(String)");
 				// Inizia il Ciclo di Attesa per le informazioni del Server.
 				while (Linea.equals(""))
 				{
 					Linea = input.readLine();
-					log.debug("Linea: "+Linea);
-					log.debug("Linea: "+convertMsg(Linea));
+					log.debug("\n"+"Linea: "+Linea);
+					log.debug("\n"+"Linea: "+convertMsg(Linea));
 					if (Linea == null)
 						Linea = "";
 					else
@@ -400,13 +400,13 @@ public class Client
 		}
 		catch (SocketException e)
 		{
-			log.error(e);
+			log.error(e.getMessage(), e);
 			throw new ClientException("000", "Connessione  caduta",
 					"Connessione caduta");
 		}
 		catch (Exception e)
 		{
-			log.error(e);
+			log.error(e.getMessage(), e);
 			Linea = "";
 		}
 		return Linea;
@@ -432,27 +432,27 @@ public class Client
 		{
 			if (!error)
 			{
-				log.debug("Recive(String, Hashtable)");
+				log.debug("\n"+"Recive(String, Hashtable)");
 				// Inizia il Ciclo di Attesa per le informazioni del Server.
 				while (true)
 				{
 					Linea = input.readLine();
-					log.debug("Linea: "+Linea);
-					log.debug("Linea: "+convertMsg(Linea));
+					log.debug("\n"+"Linea: "+Linea);
+					log.debug("\n"+"Linea: "+convertMsg(Linea));
 					if (Linea == null)
 					{
 						throw new ClientException("Connessione caduta");
 					}
 					code = Linea.substring(0, Linea.indexOf(" "));
-					log.debug("code: "+code);
+					log.debug("\n"+"code: "+code);
 					if (code.equals(codeOk))
 					{
-						log.debug("OK");
+						log.debug("\n"+"OK");
 						break;
 					}
 					if (codeErr.containsKey(code))
 					{
-						log.debug("non OK");
+						log.debug("\n"+"non OK");
 						throw new ClientException(code, Linea, (String) codeErr.get(code));
 					}
 				}
@@ -466,18 +466,18 @@ public class Client
 		}
 		catch (ClientException e)
 		{
-			log.error(e);
+			log.error(e.getMessage(), e);
 			throw e;
 		}
 		catch (SocketException e)
 		{
-			log.error(e);
+			log.error(e.getMessage(), e);
 			throw new ClientException("000", "Connessione  caduta",
 					"Connessione caduta");
 		}
 		catch (Exception e)
 		{
-			log.error(e);
+			log.error(e.getMessage(), e);
 			Linea = "";
 		}
 		return Linea;
@@ -504,26 +504,26 @@ public class Client
 		{
 			if (!error)
 			{
-				log.debug("Recive(Hashtable, Hashtable)");
+				log.debug("\n"+"Recive(Hashtable, Hashtable)");
 				// Inizia il Ciclo di Attesa per le informazioni del Server.
 				while (true)
 				{
 					Linea = input.readLine();
-					log.debug("Linea: " + Linea);
+					log.debug("\n"+"Linea: " + Linea);
 					if (Linea == null)
 					{
 						throw new ClientException("Connessione caduta");
 					}
 					code = Linea.substring(0, Linea.indexOf(" "));
-					log.debug("code: " + code);
+					log.debug("\n"+"code: " + code);
 					if (codeOk.containsKey(code))
 					{
-						log.debug("OK");
+						log.debug("\n"+"OK");
 						break;
 					}
 					if (codeErr.containsKey(code))
 					{
-						log.debug("non OK");
+						log.debug("\n"+"non OK");
 						throw new ClientException(code, Linea, (String) codeErr.get(code));
 					}
 				}
@@ -537,18 +537,18 @@ public class Client
 		}
 		catch (ClientException e)
 		{
-			log.error(e);
+			log.error(e.getMessage(), e);
 			throw e;
 		}
 		catch (SocketException e)
 		{
-			log.error(e);
+			log.error(e.getMessage(), e);
 			throw new ClientException("000", "Connessione caduta",
 					"Connessione caduta");
 		}
 		catch (Exception e)
 		{
-			log.error(e);
+			log.error(e.getMessage(), e);
 			Linea = "";
 		}
 		return Linea;
@@ -567,13 +567,13 @@ public class Client
 
 		try
 		{
-			log.debug("Send");
-			log.debug("error: "+error);
+			log.debug("\n"+"Send");
+			log.debug("\n"+"error: "+error);
 			if (!error)
 			{
-				log.debug("Send(String)");
-				log.debug("Msg: " + msg);
-				log.debug("Msg: " + convertMsg(msg));
+				log.debug("\n"+"Send(String)");
+				log.debug("\n"+"Msg: " + msg);
+				log.debug("\n"+"Msg: " + convertMsg(msg));
 				output.println(msg);
 			}
 			else
@@ -583,7 +583,7 @@ public class Client
 		}
 		catch (Exception e)
 		{
-			log.error(e);
+			log.error(e.getMessage(), e);
 			return false;
 		}
 		return true;
@@ -607,9 +607,9 @@ public class Client
 		{
 			if (!error)
 			{
-				log.debug("Send(String, boolean)");
-				log.debug("Msg: " + msg);
-				log.debug("Msg: " + convertMsg(msg));
+				log.debug("\n"+"Send(String, boolean)");
+				log.debug("\n"+"Msg: " + msg);
+				log.debug("\n"+"Msg: " + convertMsg(msg));
 				if (endline)
 				{
 					output.println(msg);
@@ -626,7 +626,7 @@ public class Client
 		}
 		catch (Exception e)
 		{
-			log.error(e);
+			log.error(e.getMessage(), e);
 			return false;
 		}
 		return true;
@@ -686,7 +686,7 @@ public class Client
 					Inp = null;
 				}
 				
-				log.debug("Close");
+				log.debug("\n"+"Close");
 				Connect.close();
 				Connect= null;
 			}
@@ -697,7 +697,7 @@ public class Client
 		}
 		catch (Exception e)
 		{
-			log.error(e);
+			log.error(e.getMessage(), e);
 			return false;
 		}
 		return true;

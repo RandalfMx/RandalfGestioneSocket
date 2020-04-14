@@ -9,7 +9,8 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.Hashtable;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import mx.randalf.socket.client.exception.ClientException;
 
@@ -25,7 +26,7 @@ public class Client
 	/**
    * Questa variabile viene utilizzata per loggare l'applicazione
    */
-	private static Logger log = Logger.getLogger(Client.class);
+	private static Logger log = LogManager.getLogger(Client.class);
 
 	/**
    * Questa variabile viene utilizzata per l'apertura della connessione

@@ -12,7 +12,8 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.Socket;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import mx.randalf.socket.server.exception.ServerException;
 
@@ -23,7 +24,7 @@ import mx.randalf.socket.server.exception.ServerException;
 public class ServerConn
 {
 
-	private static Logger log = Logger.getLogger(ServerConn.class);
+	private static Logger log = LogManager.getLogger(ServerConn.class);
 	private Socket incoming;
 	private BufferedReader input;
 	private PrintStream output;

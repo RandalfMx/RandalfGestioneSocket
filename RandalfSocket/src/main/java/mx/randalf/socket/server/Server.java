@@ -6,8 +6,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.Logger;
 
 import mx.randalf.socket.server.exception.ServerException;
 
@@ -18,7 +17,7 @@ public class Server
 	/**
    * Questa variabile viene utilizzata per loggare l'applicazione
    */
-	private Logger log = LogManager.getLogger(Server.class);
+	private Logger log = Logger.getLogger(Server.class);
 
 	private ServerSocket Connect;
 //	private boolean error;

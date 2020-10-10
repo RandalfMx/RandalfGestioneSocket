@@ -9,8 +9,7 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.Hashtable;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.Logger;
 
 import mx.randalf.socket.client.exception.ClientException;
 
@@ -26,7 +25,7 @@ public class Client
 	/**
    * Questa variabile viene utilizzata per loggare l'applicazione
    */
-	private static Logger log = LogManager.getLogger(Client.class);
+	private static Logger log = Logger.getLogger(Client.class);
 
 	/**
    * Questa variabile viene utilizzata per l'apertura della connessione
@@ -637,7 +636,7 @@ public class Client
 		String testo = null;
 		String ris = "";
 		for (int x=0; x<msg.length(); x++){
-			testo = Integer.toHexString(new Integer(msg.charAt(x)).intValue()).toUpperCase();
+			testo = Integer.toHexString(Integer.valueOf(msg.charAt(x)).intValue()).toUpperCase();
 			ris += (testo.length()==1?"0":"")+testo+" ";
 		}
 		return ris;
